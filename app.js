@@ -1,10 +1,15 @@
 document.addEventListener("submit" , (event)=>{
-    console.log("Submitted")
-    event.preventDefault()
-})
+    console.log("Validating")
+    let user = document.getElementById("user").value;
+    let password = document.getElementById("password").value;
 
-fetch("http://localhost:3000/" , {})
-.then(()=>{})
-.catch(()=>{
-    console.log("an error occured")
+    let request = new XMLHttpRequest();
+    request.open("POST", "http://localhost:3000/authorize");
+    //request.send(new FormData(formElement));
+    console.log("Validated")
+
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send(`user=${user}&password=${password}`);
+
+    event.preventDefault()
 })
